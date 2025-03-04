@@ -50,4 +50,16 @@ As we look to the future, it’s clear that JavaScript frameworks will continue 
 
 ---
 
+```scss
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  
+  to {
+    transform: rotate(360deg);
+  }
+}
+```
+
 *Thank you for reading! If you enjoyed this article, stay tuned for more insights into the world of web development.*

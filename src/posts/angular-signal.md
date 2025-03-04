@@ -1,16 +1,16 @@
 ---
-title: "Angular Signal, "
+title: "Angular Signal이란 무엇인가?"
 date: "2023-12-22"
 author: "David Oh"
 ---
 
 ## 개요
 
-* Angular 17에서 Signals 라는 시스템을 새롭게 도입
+- Angular 17에서 Signals 라는 시스템을 새롭게 도입
 
-도입 방안을 다루기 전에..
-
-Angular Signals는 무엇인가?
+### 도입 방안을 다루기 전에..
+---
+### Angular Signals는 무엇인가?
 
 Angular가 애플리케이션 전반에 걸쳐 애플리케이션의 상태가 어디서, 어떻게 사용되는지 세분화하여 렌더링 업데이트를 최적화할 수 있도록 하는 시스템
 
@@ -76,7 +76,7 @@ RxJS is not glitch-free
 
 reactive system에서 계산 또는 반응이 중간, 불일치 상태일 때 결함이 생긴다.
 
-Signals
+### Signals
 
 프레임워크는 주어진 템플릿에서 어떤 Signal이 액세스되는지 추적할 수 있으며, 모델에 대한 주어진 변경에 의해 영향을 받는 구성 요소에 대한 세밀한 정보를 제공
 
