@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        <header className="w-full sticky top-0 left-0 right-0 z-[9999] px-5 py-4 flex justify-center backdrop-blur-md">
+        <header className="w-full sticky top-0 left-0 right-0 z-[200] px-5 py-4 flex justify-center backdrop-blur-md">
           <div className="max-w-[700px] w-full flex items-center">
             <Link className="mr-auto" href="/">
               <h1 className="text-xl font-bold">DavidClimbing Tech Blog</h1>

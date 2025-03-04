@@ -21,27 +21,29 @@ export default async function Post({params}) {
   return (
     <article className="w-full flex justify-center px-5 mt-1" itemScope itemType="http://schema.org/Article">
       <main className="max-w-[700px] w-full flex-col justify-center">
-        <h1> {post.title} </h1>
+        <h1 className="text-3xl font-bold mb-1"> {post.title} </h1>
         <p> {post.date} </p>
-        <Markdown
-          className="markdown-body"
-          rehypePlugins={[rehypeRaw]}
-          components={{
-            code: (props) => {
-              return (
-                <code
-                  dangerouslySetInnerHTML={{
-                    __html: hljs.highlight(props.children?.toString() ?? "", {
-                      language: props.className?.match(/language-(\w+)/)?.[1] ?? "text",
-                    }).value,
-                  }}
-                />
-              );
-            },
-          }}
-        >
-          {post.content}
-        </Markdown>
+        <div className="my-8">
+          <Markdown
+            className="markdown-body"
+            rehypePlugins={[rehypeRaw]}
+            components={{
+              code: (props) => {
+                return (
+                  <code
+                    dangerouslySetInnerHTML={{
+                      __html: hljs.highlight(props.children?.toString() ?? "", {
+                        language: props.className?.match(/language-(\w+)/)?.[1] ?? "text",
+                      }).value,
+                    }}
+                  />
+                );
+              },
+            }}
+          >
+            {post.content}
+          </Markdown>
+        </div>
       </main>
     </article>
   )
