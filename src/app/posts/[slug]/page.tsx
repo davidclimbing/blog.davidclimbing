@@ -7,6 +7,7 @@ import {notFound} from "next/navigation";
 import hljs from "highlight.js";
 import rehypeRaw from "rehype-raw";
 import Markdown from "react-markdown";
+import {Utterances} from "@/app/posts/[slug]/utterances";
 
 async function fetchPosts(slug) {
   const posts = getAllPosts();
@@ -44,6 +45,7 @@ export default async function Post({params}) {
             {post.content}
           </Markdown>
         </div>
+        <Utterances />
       </main>
     </article>
   )
