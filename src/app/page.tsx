@@ -6,13 +6,16 @@ export default function Home() {
 
   return (
     <>
-      <main className="w-full flex justify-center px-5 mt-1">
+      <main className="w-full flex justify-center px-5 mt-1" itemScope>
         <div className="max-w-[700px] w-full flex items-center">
           <ul className="w-full align-middle flex gap-5 flex-col">
             {posts.map((post) => (
-              <li className="border border-solid border-gray-200 p-5 rounded-xl" key={post.slug}>
-                <Link href={`/posts/${post.slug}`}> {post.title} </Link>
-                <p> {post.date} </p>
+              <li className="border border-solid border-gray-200 p-5 rounded-xl"
+                  key={post.slug}>
+                <Link href={`/posts/${post.slug}`}>
+                  <p> {post.title} </p>
+                  <p> {post.date} </p>
+                </Link>
               </li>
             ))}
           </ul>
