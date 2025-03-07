@@ -1,5 +1,5 @@
 ---
-title: "테스트란?"
+title: "테스트 방법론"
 date: "2023-06-23"
 author: "David Oh"
 ---
@@ -15,7 +15,7 @@ author: "David Oh"
 
 경우의 수를 파악하는 부분에서 미흡함을 느낌
 
-## 그래서(So?) Software Testing
+## 그래서(So?) Software Test Methodology
 
 ### Testing Approach
 

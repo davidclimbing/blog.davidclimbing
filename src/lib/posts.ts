@@ -16,7 +16,8 @@ export const getAllPosts = () => {
     return {
       slug,
       content,
-      ...data
+      title: data.title,
+      date: data.date
     }
   })
 };
