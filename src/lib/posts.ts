@@ -6,6 +6,14 @@ import html from 'remark-html';
 import remarkGfm from 'remark-gfm';
 import hljs from 'highlight.js';
 import { visit } from 'unist-util-visit';
+import type { Node } from 'unist';
+
+// Node types for AST handling
+interface CodeNode extends Node {
+  type: 'code';
+  lang?: string;
+  value: string;
+}
 
 const postsDir = path.join(process.cwd(), "src/posts");
 
@@ -42,15 +50,16 @@ export async function getPost(slug: string) {
 }
 
 function remarkHighlight() {
-  return (tree: any) => {
-    visit(tree, 'code', (node: any) => {
+  return (tree: Node) => {
+    visit(tree, 'code', (node: CodeNode) => {
       const lang = node.lang || 'plaintext';
       try {
         const highlightedCode = hljs.highlight(node.value, { 
           language: lang || 'plaintext'
         }).value;
         
-        node.type = 'html';
+        // Type assertion for TypeScript
+        (node as unknown as { type: string }).type = 'html';
         node.value = `<pre class="hljs"><code class="language-${lang}">${highlightedCode}</code></pre>`;
       } catch (err) {
         console.error(`Error highlighting language: ${lang}`, err);
@@ -59,7 +68,7 @@ function remarkHighlight() {
   };
 }
 
-async function processMarkdown(markdown: string) {
+async function processMarkdown(markdown: string): Promise<string> {
   const result = await remark()
     .use(remarkGfm)
     .use(remarkHighlight)

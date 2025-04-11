@@ -5,6 +5,8 @@ export function Utterances() {
   const root = createRef<HTMLDivElement>();
 
   useEffect(() => {
+    if (!root.current) return;
+    
     const element = document.createElement("script");
 
     element.setAttribute("src", "https://utteranc.es/client.js");
@@ -15,8 +17,8 @@ export function Utterances() {
     element.setAttribute("crossorigin", "anonymous");
     element.async = true;
 
-    root.current?.appendChild(element);
-  }, []);
+    root.current.appendChild(element);
+  }, [root]);
 
   return <div ref={root} />;
 }

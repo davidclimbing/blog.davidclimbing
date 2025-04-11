@@ -27,7 +27,7 @@ export default async function Post({params}: {params: {slug: string}}) {
         <p>{post.date}</p>
         
         <div 
-          className="markdown-body my-8"
+          className="markdown-body !my-8"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
         
