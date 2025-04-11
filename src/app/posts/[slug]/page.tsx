@@ -2,51 +2,39 @@ import "github-markdown-css/github-markdown-dark.css";
 import "highlight.js/styles/github-dark.css";
 import "./style.scss";
 
-import {getAllPosts} from "@/lib/posts";
+import {getAllPosts, getPost} from "@/lib/posts";
 import {notFound} from "next/navigation";
-import hljs from "highlight.js";
-import rehypeRaw from "rehype-raw";
-import Markdown from "react-markdown";
-import {Utterances} from "@/app/posts/[slug]/utterances";
+import {Utterances} from "./utterances";
 
-async function fetchPosts(slug) {
+export async function generateStaticParams() {
   const posts = getAllPosts();
-  return posts.find((post) => post.slug === slug);
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
 }
 
-export default async function Post({params}) {
-  const post = await fetchPosts(params.slug);
-
+export default async function Post({params}: {params: {slug: string}}) {
+  const slug = params?.slug;
+  if (!slug) notFound();
+  
+  const post = await getPost(slug);
   if (!post) notFound();
 
   return (
-    <article className="w-full flex justify-center px-5 mt-1" itemScope itemType="http://schema.org/Article">
+    <article className="w-full flex justify-center px-5 mt-1">
       <main className="max-w-[700px] w-full flex-col justify-center">
-        <h1 className="text-3xl font-bold mb-1"> {post.title} </h1>
-        <p> {post.date} </p>
-        <div className="my-8">
-          <Markdown
-            className="markdown-body"
-            rehypePlugins={[rehypeRaw]}
-            components={{
-              code: (props) => {
-                return (
-                  <code
-                    dangerouslySetInnerHTML={{
-                      __html: hljs.highlight(props.children?.toString() ?? "", {
-                        language: props.className?.match(/language-(\w+)/)?.[1] ?? "text",
-                      }).value,
-                    }}
-                  />
-                );
-              },
-            }}
-          >
-            {post.content}
-          </Markdown>
+        <h1 className="text-3xl font-bold mb-1">{post.title}</h1>
+        <p>{post.date}</p>
+        
+        <div 
+          className="markdown-body my-8"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
+        
+        <div className="comments-section">
+          <Utterances />
         </div>
-        <Utterances />
       </main>
     </article>
-  )
+  );
 }
