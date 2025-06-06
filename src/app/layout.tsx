@@ -21,9 +21,14 @@ export default function RootLayout({
             <Link className="mr-auto" href="/">
               <h1 className="text-xl font-bold">DavidClimbing</h1>
             </Link>
-            <a className="text-base" href="https://github.com/davidclimbing">
-              github
-            </a>
+            <div className="flex flex-row items-center gap-2">
+              <a className="text-base" href="https://playground.davidclimbing.com">
+                Playground
+              </a>
+              <a className="text-base" href="https://github.com/davidclimbing">
+                github
+              </a>
+            </div>
           </div>
         </header>
         {children}

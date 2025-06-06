@@ -3,4 +3,7 @@ export interface Post {
   date: string;
   content: string;
   slug: string;
+  tag?: string[];
 }
+
+export type PostSummary = Omit<Post, "content">;
