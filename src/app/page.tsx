@@ -14,7 +14,7 @@ export default function Home() {
                   key={post.slug}>
                 <Link href={`/posts/${post.slug}`}>
                   <p> {post.title} </p>
-                  <p> {post.date} </p>
+                  <p> {post.date instanceof Date ? post.date.toLocaleDateString() : post.date} </p>
                 </Link>
               </li>
             ))}

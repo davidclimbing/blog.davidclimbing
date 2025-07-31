@@ -24,7 +24,7 @@ export default async function Post({params}: {params: {slug: string}}) {
     <article className="w-full flex justify-center px-5 mt-1">
       <main className="max-w-[700px] w-full flex-col justify-center">
         <h1 className="text-3xl font-bold mb-1">{post.title}</h1>
-        <p>{post.date}</p>
+        <p>{post.date instanceof Date ? post.date.toLocaleDateString() : post.date}</p>
         
         <div 
           className="markdown-body !my-8"
