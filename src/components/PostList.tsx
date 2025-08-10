@@ -29,10 +29,10 @@ const PostItem = React.memo(
     return (
       <li
         key={`${post.slug}-${index}`}
-        className='border border-solid border-gray-200 p-5 rounded-xl 
-                 transform transition-transform duration-200 will-change-transform
-                 focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2'
+        className='border border-solid border-gray-200 p-5 rounded-xl
+                 transform transition-transform duration-200 will-change-transform'
         role='listitem'
+        style={{ containIntrinsicSize: '700px 120px' }}
       >
         <Link
           href={`/posts/${post.slug}`}
