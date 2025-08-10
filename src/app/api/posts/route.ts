@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { getAllPosts } from '@/lib/posts';
+import { getAllPostsMetadata } from '@/lib/posts';
 
 export async function GET(request: NextRequest) {
   try {
@@ -13,25 +13,21 @@ export async function GET(request: NextRequest) {
     const page = parseInt(searchParams.get('page') || '0');
     const limit = parseInt(searchParams.get('limit') || '5');
 
-    // 모든 포스트를 가져와서 페이지네이션
-    const allPosts = getAllPosts();
+    // 메타데이터만 가져와서 페이지네이션 (content 제외로 훨씬 빠름)
+    const allPosts = getAllPostsMetadata();
     const startIndex = page * limit;
     const endIndex = startIndex + limit;
     const paginatedPosts = allPosts.slice(startIndex, endIndex);
 
-    // 메타데이터만 반환 (content는 제외하여 응답 크기 최적화)
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const postsMetadata = paginatedPosts.map(({ content, ...rest }) => rest);
-
     return Response.json(
       {
-        posts: postsMetadata,
+        posts: paginatedPosts,
         pagination: {
           currentPage: page,
           totalPosts: allPosts.length,
           hasMore: endIndex < allPosts.length,
           postsPerPage: limit,
-          loadedCount: startIndex + postsMetadata.length,
+          loadedCount: startIndex + paginatedPosts.length,
         },
       },
       { headers }

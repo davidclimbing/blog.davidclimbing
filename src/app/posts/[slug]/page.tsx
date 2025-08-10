@@ -1,13 +1,11 @@
-import "github-markdown-css/github-markdown-dark.css";
-import "highlight.js/styles/github-dark.css";
 import "./style.scss";
 
-import { getAllPosts, getPost } from "@/lib/posts";
+import { getAllPostsMetadata, getPost } from "@/lib/posts";
 import { notFound } from "next/navigation";
 import { Utterances } from "./utterances";
 
 export async function generateStaticParams() {
-  const posts = getAllPosts();
+  const posts = getAllPostsMetadata();
   return posts.map((post) => ({
     slug: post.slug,
   }));

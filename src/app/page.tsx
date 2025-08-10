@@ -1,4 +1,4 @@
-import { getAllPosts } from '@/lib/posts';
+import { getAllPostsMetadata } from '@/lib/posts';
 import ClientPageWrapper from '@/components/ClientPageWrapper';
 import { PostsProvider } from '@/contexts/PostsContext';
 import InfiniteScrollContainer from '@/components/InfiniteScrollContainer';
@@ -6,8 +6,8 @@ import PostList from '@/components/PostList';
 import InitialPostsLoader from '@/components/InitialPostsLoader';
 
 export default function Home() {
-  const allPosts = getAllPosts();
-  const initialPosts = allPosts.slice(0, 5).map(({ content, ...rest }) => rest);
+  const allPosts = getAllPostsMetadata();
+  const initialPosts = allPosts.slice(0, 10);
 
   return (
     <ClientPageWrapper>
