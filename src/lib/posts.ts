@@ -1,6 +1,6 @@
-import fs from "fs"
-import path from "path"
-import matter from "gray-matter";
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 import remarkGfm from 'remark-gfm';
@@ -15,37 +15,37 @@ interface CodeNode extends Node {
   value: string;
 }
 
-const postsDir = path.join(process.cwd(), "src/posts");
+const postsDir = path.join(process.cwd(), 'src/posts');
 
 export const getAllPosts = () => {
   const fileNames = fs.readdirSync(postsDir).reverse();
-  return fileNames.map((fileName) => {
-    const slug = fileName.replace(/\.md$/, "");
+  return fileNames.map(fileName => {
+    const slug = fileName.replace(/\.md$/, '');
     const filePath = path.join(postsDir, fileName);
-    const fileContents = fs.readFileSync(filePath, "utf8");
+    const fileContents = fs.readFileSync(filePath, 'utf8');
 
-    const {content, data} = matter(fileContents);
-    
+    const { content, data } = matter(fileContents);
+
     return {
       slug,
       content,
       title: data.title,
-      date: data.date
-    }
+      date: data.date,
+    };
   });
 };
 
 export async function getPost(slug: string) {
   const posts = getAllPosts();
   const post = posts.find(p => p.slug === slug);
-  
+
   if (!post) return null;
-  
+
   const htmlContent = await processMarkdown(post.content);
-  
+
   return {
     ...post,
-    content: htmlContent
+    content: htmlContent,
   };
 }
 
@@ -54,10 +54,10 @@ function remarkHighlight() {
     visit(tree, 'code', (node: CodeNode) => {
       const lang = node.lang || 'plaintext';
       try {
-        const highlightedCode = hljs.highlight(node.value, { 
-          language: lang || 'plaintext'
+        const highlightedCode = hljs.highlight(node.value, {
+          language: lang || 'plaintext',
         }).value;
-        
+
         // Type assertion for TypeScript
         (node as unknown as { type: string }).type = 'html';
         node.value = `<pre class="hljs"><code class="language-${lang}">${highlightedCode}</code></pre>`;
@@ -73,9 +73,9 @@ async function processMarkdown(markdown: string): Promise<string> {
     .use(remarkGfm)
     .use(remarkHighlight)
     .use(html, {
-      sanitize: false
+      sanitize: false,
     })
     .process(markdown);
-  
+
   return result.toString();
 }

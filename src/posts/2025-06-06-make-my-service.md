@@ -1,8 +1,8 @@
 ---
-title: "습작 모음"
-date: "2025-06-06"
-author: "David Oh"
-tag: ["Journal"]
+title: '습작 모음'
+date: '2025-06-06'
+author: 'David Oh'
+tag: ['Journal']
 ---
 
 # WIP

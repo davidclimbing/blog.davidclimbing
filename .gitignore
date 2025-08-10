@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Analytics data file (contains visitor statistics)
+.analytics-data.json
+
+.vscode

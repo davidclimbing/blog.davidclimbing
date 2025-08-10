@@ -1,21 +1,25 @@
 ---
-title: "Angular Signal이란 무엇인가?"
-date: "2023-12-22"
-author: "David Oh"
+title: 'Angular Signal이란 무엇인가?'
+date: '2023-12-22'
+author: 'David Oh'
 ---
 
 ## 목차
+
 - Angular Signals는 무엇인가?
 - Angular Signals 왜 좋은가?
 
 ## 개요
+
 - Angular 17에서 Signals 라는 시스템을 새롭게 도입
-- 해당 기술을 도입시 얻을 수 있는 이점에 대해 알아보자 
+- 해당 기술을 도입시 얻을 수 있는 이점에 대해 알아보자
 
 ## Angular Signals는 무엇인가?
+
 Angular가 애플리케이션 전반에 걸쳐 애플리케이션의 상태가 어디서, 어떻게 사용되는지 세분화하여 렌더링 업데이트를 최적화할 수 있도록 하는 시스템
 
 ### Signals
+
 - 특정 값의 변화를 알려주는, 값을 둘러싼 Wrapper이다.
 - signal의 값은 항상 getter function을 통해서 읽게 된다.
 - **종류**
@@ -33,7 +37,7 @@ Angular가 애플리케이션 전반에 걸쳐 애플리케이션의 상태가 �
     - 하나 또는 여러개의 signal 값이 바뀌면 실행되는 연산이다.
     - 변화 감지 과정에서 항상 비동기적으로 실행된다.
     - Angular는 해당 구성 요소의 템플릿 내에서 읽은 Signal이 변경될 때마다 구성 요소의 UI를 업데이트하는 효과를 사용
-    
+
 ## Angular Signals 왜 좋은가?
 
 - **Reactivity**

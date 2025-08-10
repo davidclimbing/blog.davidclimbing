@@ -15,14 +15,14 @@
   ol {
     list-style: decimal;
   }
-  
+
   pre.hljs {
     background-color: #282c34;
     padding: 16px;
     overflow: auto;
     border-radius: 6px;
     margin: 16px 0;
-    
+
     code {
       background-color: transparent;
       padding: 0;
@@ -30,14 +30,14 @@
       font-family: monospace;
     }
   }
-  
+
   code {
     background-color: rgba(110, 118, 129, 0.4);
     padding: 0.2em 0.4em;
     border-radius: 3px;
     font-family: monospace;
   }
-  
+
   /* Ensure highlight.js classes work properly */
   .hljs-keyword,
   .hljs-selector-tag,
@@ -76,4 +76,3 @@
     color: #61afef;
   }
 }
-

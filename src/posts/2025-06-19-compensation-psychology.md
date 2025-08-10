@@ -1,7 +1,7 @@
 ---
-title: "[WIM] 보상심리를 자극하여 갓생을 살아보자!"
-date: "2025-06-19"
-author: "David Oh"
+title: '[WIM] 보상심리를 자극하여 갓생을 살아보자!'
+date: '2025-06-19'
+author: 'David Oh'
 ---
 
 만들어보자

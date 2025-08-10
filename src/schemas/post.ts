@@ -6,4 +6,4 @@ export interface Post {
   tag?: string[];
 }
 
-export type PostSummary = Omit<Post, "content">;
+export type PostSummary = Omit<Post, 'content'>;
