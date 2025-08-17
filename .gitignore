@@ -44,4 +44,5 @@ next-env.d.ts
 .analytics-data.json
 
 .vscode
-.performance-test.js
+
+performance-test.js
