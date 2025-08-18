@@ -8,7 +8,7 @@ export const Header = () => {
           <h1 className='text-xl font-bold'>DavidClimbing</h1>
         </Link>
         <div className='flex flex-row items-center gap-2'>
-          <a className='text-base' href='https://playgrounddavidclimbing.vercel.app'>
+          <a className='text-base' href='https://playground.davidclimbing.com'>
             Playground
           </a>
           <a className='text-base' href='https://github.com/davidclimbing'>
