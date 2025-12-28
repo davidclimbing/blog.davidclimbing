@@ -28,7 +28,6 @@ const PostItem = React.memo(
 
     return (
       <li
-        key={`${post.slug}-${index}`}
         className='border border-solid border-gray-200 p-5 rounded-xl
                  transform transition-transform duration-200 will-change-transform'
         role='listitem'
@@ -62,8 +61,9 @@ export default function PostList() {
   const { state } = usePosts();
 
   const postItems = useMemo(() => {
+    // slug가 고유하므로 slug만 key로 사용 (중복 제거 로직으로 보장됨)
     return state.posts.map((post, index) => (
-      <PostItem key={`${post.slug}-${index}`} post={post} index={index} />
+      <PostItem key={post.slug} post={post} index={index} />
     ));
   }, [state.posts]);
 

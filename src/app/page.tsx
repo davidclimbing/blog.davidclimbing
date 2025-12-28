@@ -8,6 +8,7 @@ import InitialPostsLoader from '@/components/InitialPostsLoader';
 export default function Home() {
   const allPosts = getAllPostsMetadata();
   const initialPosts = allPosts.slice(0, 10);
+  const totalPosts = allPosts.length;
 
   return (
     <ClientPageWrapper>
@@ -19,7 +20,7 @@ export default function Home() {
             {/* <VisitorStats /> */}
 
             {/* 초기 데이터 로더 */}
-            <InitialPostsLoader initialPosts={initialPosts} />
+            <InitialPostsLoader initialPosts={initialPosts} totalPosts={totalPosts} />
 
             {/* 무한 스크롤 포스트 목록 */}
             <InfiniteScrollContainer>

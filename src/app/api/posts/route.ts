@@ -10,8 +10,26 @@ export async function GET(request: NextRequest) {
       'X-Content-Type-Options': 'nosniff',
     });
     const searchParams = request.nextUrl.searchParams;
-    const page = parseInt(searchParams.get('page') || '0');
-    const limit = parseInt(searchParams.get('limit') || '5');
+    
+    // 보안: 입력 검증 및 범위 제한
+    const pageParam = searchParams.get('page') || '0';
+    const limitParam = searchParams.get('limit') || '5';
+    
+    // 숫자 검증 및 범위 제한
+    let page = parseInt(pageParam, 10);
+    let limit = parseInt(limitParam, 10);
+    
+    // NaN, 음수, 또는 범위를 벗어난 값 처리
+    if (isNaN(page) || page < 0) {
+      page = 0;
+    }
+    
+    if (isNaN(limit) || limit < 1) {
+      limit = 5;
+    } else if (limit > 50) {
+      // DoS 방지: 최대 50개로 제한
+      limit = 50;
+    }
 
     // 메타데이터만 가져와서 페이지네이션 (content 제외로 훨씬 빠름)
     const allPosts = getAllPostsMetadata();

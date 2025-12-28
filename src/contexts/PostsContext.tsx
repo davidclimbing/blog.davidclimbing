@@ -33,7 +33,7 @@ type PostsAction =
       payload: { posts: PostSummary[]; hasMore: boolean; totalPosts?: number };
     }
   | { type: 'LOAD_ERROR'; payload: string }
-  | { type: 'SET_INITIAL'; payload: PostSummary[] }
+  | { type: 'SET_INITIAL'; payload: { posts: PostSummary[]; totalPosts: number } }
   | { type: 'RESET' };
 
 const initialState: PostsState = {
@@ -51,7 +51,7 @@ const initialState: PostsState = {
 const PostsContext = createContext<{
   state: PostsState;
   loadNextPage: () => void;
-  setInitialPosts: (posts: PostSummary[]) => void;
+  setInitialPosts: (posts: PostSummary[], totalPosts: number) => void;
   reset: () => void;
 } | null>(null);
 
@@ -61,7 +61,20 @@ function postsReducer(state: PostsState, action: PostsAction): PostsState {
       return { ...state, loading: true, error: null };
 
     case 'LOAD_SUCCESS': {
-      const newPosts = [...state.posts, ...action.payload.posts];
+      // 중복 제거: slug를 기준으로 중복된 포스트 필터링
+      const existingSlugs = new Set(state.posts.map(post => post.slug));
+      const uniqueNewPosts = action.payload.posts.filter(
+        post => !existingSlugs.has(post.slug)
+      );
+
+      // 중복이 발견된 경우 경고 로그
+      if (action.payload.posts.length !== uniqueNewPosts.length) {
+        console.warn(
+          `중복된 포스트 감지: ${action.payload.posts.length - uniqueNewPosts.length}개 제거됨`
+        );
+      }
+
+      const newPosts = [...state.posts, ...uniqueNewPosts];
 
       // 메모리 최적화: 최대 개수 초과 시 오래된 포스트 제거
       const optimizedPosts =
@@ -90,12 +103,18 @@ function postsReducer(state: PostsState, action: PostsAction): PostsState {
       };
 
     case 'SET_INITIAL':
+      // 초기 포스트 개수를 기반으로 올바른 currentPage 계산
+      // 예: 초기 포스트가 10개이고 postsPerPage가 5라면, 다음은 page=2 (인덱스 10-14)
+      const initialPageCount = Math.ceil(action.payload.posts.length / state.postsPerPage);
+      const hasMorePosts = action.payload.posts.length < action.payload.totalPosts;
+      
       return {
         ...state,
-        posts: action.payload,
-        currentPage: 1,
+        posts: action.payload.posts,
+        currentPage: initialPageCount, // 다음 요청 시 올바른 페이지부터 시작
         initialLoaded: true,
-        hasMore: action.payload.length >= state.postsPerPage,
+        hasMore: hasMorePosts, // 전체 포스트 개수와 비교하여 hasMore 계산
+        totalPosts: action.payload.totalPosts,
       };
 
     case 'RESET':
@@ -193,8 +212,8 @@ export function PostsProvider({ children }: { children: React.ReactNode }) {
     ]
   );
 
-  const setInitialPosts = useCallback((posts: PostSummary[]) => {
-    dispatch({ type: 'SET_INITIAL', payload: posts });
+  const setInitialPosts = useCallback((posts: PostSummary[], totalPosts: number) => {
+    dispatch({ type: 'SET_INITIAL', payload: { posts, totalPosts } });
   }, []);
 
   const reset = useCallback(() => {

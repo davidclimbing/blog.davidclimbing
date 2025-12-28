@@ -11,8 +11,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Post({ params }: { params: { slug: string } }) {
-  const slug = params?.slug;
+export default async function Post({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   if (!slug) notFound();
 
   const post = await getPost(slug);
