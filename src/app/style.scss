@@ -2,14 +2,33 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
 :root {
-  --black: #0d1117;
-  --white: #ededed;
+  /* Color Palette - Technical Editorial */
+  --color-bg-primary: #0d1117;
+  --color-bg-secondary: #161b22;
+  --color-bg-elevated: #1c2128;
+  --color-text-primary: #e6edf3;
+  --color-text-secondary: #8b949e;
+  --color-text-tertiary: #6e7681;
+  --color-accent-primary: #f97583;
+  --color-accent-secondary: #ffab70;
+  --color-border: #30363d;
+  --color-border-hover: #484f58;
+
+  /* Gradients */
+  --gradient-accent: linear-gradient(135deg, #f97583 0%, #ffab70 100%);
+  --gradient-subtle: linear-gradient(180deg, rgba(249, 117, 131, 0.04) 0%, rgba(255, 171, 112, 0.04) 100%);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 20px rgba(249, 117, 131, 0.15);
 }
 
 html,
 body {
-  color: var(--white);
-  background: var(--black);
+  color: var(--color-text-primary);
+  background: var(--color-bg-primary);
   font-family:
     Pretendard,
     -apple-system,
@@ -22,30 +41,63 @@ body {
     'Noto Sans KR',
     'Malgun Gothic',
     sans-serif;
-  /* Layout shift 방지 */
   font-display: swap;
   min-height: 100vh;
   margin: 0;
   padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
 }
 
-/* 무한 스크롤 및 애니메이션 스타일 - GPU 가속화 */
-.post-item {
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
-  backface-visibility: hidden;
+/* Subtle background gradient effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400px;
+  background: radial-gradient(
+    ellipse 80% 50% at 50% -20%,
+    rgba(249, 117, 131, 0.06),
+    transparent
+  );
+  pointer-events: none;
+  z-index: 0;
+}
 
-  &:hover {
-    transform: translateY(-2px) translateZ(0);
-    /* GPU 가속화 */
+/* Fade in animation for posts */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Post Item Animations - Editorial Timeline */
+.post-item {
+  position: relative;
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* First item has top border */
+  &:first-child article {
+    border-top: 1px solid var(--color-border);
   }
 }
 
 li:focus {
-  outline: none;
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 4px;
 }
 
-/* 성능 최적화를 위한 컨테인먼트 */
+/* Performance optimization */
 .post-list-container {
   contain: layout style paint;
 }

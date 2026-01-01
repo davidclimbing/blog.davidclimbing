@@ -28,26 +28,46 @@ const PostItem = React.memo(
 
     return (
       <li
-        className='border border-solid border-gray-200 p-5 rounded-xl
-                 transform transition-transform duration-200 will-change-transform'
+        className='post-item group'
         role='listitem'
-        style={{ containIntrinsicSize: '700px 120px' }}
+        style={{
+          containIntrinsicSize: '700px 100px',
+          animationDelay: `${index * 40}ms`,
+          animationFillMode: 'backwards'
+        }}
       >
         <Link
           href={`/posts/${post.slug}`}
-          className='block focus:outline-none group'
+          className='block focus:outline-none'
           aria-label={`${post.title} 포스트 읽기`}
         >
-          <article className='flex flex-col gap-3'>
-            <h2
-              className='text-lg font-bold text-white group-hover:text-blue-600
-                         transition-colors duration-200 line-clamp-2'
+          <article className='flex gap-8 items-baseline py-6 border-b border-[var(--color-border)]'>
+            {/* Date column - fixed width for alignment */}
+            <time
+              className='text-sm font-medium text-[var(--color-text-tertiary)] tracking-tight flex-shrink-0 w-[140px]'
+              dateTime={isoDateTime}
             >
-              {post.title}
-            </h2>
-            <time className='text-sm text-gray-500' dateTime={isoDateTime}>
               {formattedDate}
             </time>
+
+            {/* Title and metadata */}
+            <div className='flex-1 min-w-0 flex flex-col gap-2'>
+              <div className='w-fit'>
+                <h2
+                  className='text-2xl font-bold leading-tight text-[var(--color-text-primary)]
+                           transition-all duration-300 relative
+                           group-hover:text-[var(--color-accent-primary)]'
+                >
+                  {post.title}
+                  <span className='absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[var(--color-accent-primary)] to-[var(--color-accent-secondary)] transition-all duration-300 group-hover:w-full'></span>
+                </h2>
+              </div>
+
+              <div className='flex items-center gap-2 text-xs text-[var(--color-text-tertiary)] uppercase tracking-[0.1em] font-medium'>
+                <span>Article</span>
+                <span className='opacity-30'>•</span>
+              </div>
+            </div>
           </article>
         </Link>
       </li>
@@ -70,16 +90,17 @@ export default function PostList() {
   if (state.posts.length === 0 && state.loading && !state.initialLoaded) {
     return (
       <div
-        className='flex items-center justify-center p-8'
+        className='flex items-center justify-center p-12'
         role='status'
         aria-label='포스트 로딩 중'
       >
-        <div className='flex items-center gap-3'>
+        <div className='flex items-center gap-4'>
           <div
-            className='animate-spin rounded-full h-8 w-8 border-2 border-gray-300 border-t-gray-600'
+            className='animate-spin rounded-full h-10 w-10 border-2 border-[var(--color-border)] border-t-[var(--color-accent-primary)]'
             aria-hidden='true'
+            style={{ borderWidth: '2px' }}
           ></div>
-          <span className='text-gray-600 font-medium'>
+          <span className='text-[var(--color-text-secondary)] font-medium tracking-wide'>
             포스트를 불러오는 중...
           </span>
         </div>
@@ -89,16 +110,16 @@ export default function PostList() {
 
   if (state.posts.length === 0 && !state.loading) {
     return (
-      <div className='text-center p-8 text-gray-500'>
-        <div className='text-lg mb-2'>📝</div>
-        <p>아직 작성된 포스트가 없습니다.</p>
+      <div className='text-center p-16 border border-[var(--color-border)] rounded-2xl bg-[var(--color-bg-elevated)]'>
+        <div className='text-4xl mb-4 opacity-30'>📝</div>
+        <p className='text-[var(--color-text-secondary)] font-medium'>아직 작성된 포스트가 없습니다.</p>
       </div>
     );
   }
 
   // 포스트 목록 렌더링
   return (
-    <ul className='w-full flex gap-5 flex-col post-list-container' role='list'>
+    <ul className='w-full flex flex-col post-list-container' role='list'>
       {postItems}
     </ul>
   );
