@@ -2,6 +2,7 @@
 title: '테스트 방법론'
 date: '2023-06-23'
 author: 'David Oh'
+tag: ['Testing', 'QA', 'Methodology']
 ---
 
 ## 테스트란?

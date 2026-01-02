@@ -2,6 +2,7 @@
 title: 'Mutable Vs Immutable'
 date: '2025-04-03'
 author: 'David Oh'
+tag: ['JavaScript', 'React', 'Programming']
 ---
 
 # JavaScript에서의 Mutable vs Immutable

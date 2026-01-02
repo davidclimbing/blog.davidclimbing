@@ -2,6 +2,7 @@
 title: 'Angular Signal이란 무엇인가?'
 date: '2023-12-22'
 author: 'David Oh'
+tag: ['Angular', 'Frontend', 'Signal']
 ---
 
 ## 목차

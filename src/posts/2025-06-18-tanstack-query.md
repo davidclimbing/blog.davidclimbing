@@ -2,6 +2,7 @@
 title: '[TIL] Tanstack query'
 date: '2025-06-18'
 author: 'David Oh'
+tag: ['TIL', 'React', 'Tanstack Query']
 ---
 
 ## Query

@@ -11,6 +11,7 @@ export interface PostSummary {
   slug: string;
   title: string;
   date: string | Date;
+  tag?: string[];
 }
 
 interface PostsState {

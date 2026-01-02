@@ -22,7 +22,7 @@ interface CodeNode extends Node {
 const postsDir = path.join(process.cwd(), 'src/posts');
 
 // Cache for posts metadata to avoid repeated filesystem reads
-let postsMetadataCache: Array<{ slug: string, title: string, date: string, published?: boolean }> | null = null;
+let postsMetadataCache: Array<{ slug: string, title: string, date: string, tag?: string[], published?: boolean }> | null = null;
 let lastCacheUpdate = 0;
 const CACHE_TTL = 60000; // 1 minute cache
 
@@ -41,6 +41,7 @@ export const getAllPosts = () => {
         content,
         title: data.title,
         date: data.date,
+        tag: data.tag || [],
         published: data.published !== false, // 기본값: true (없으면 공개)
       };
     })
@@ -66,6 +67,7 @@ export const getAllPostsMetadata = () => {
         slug,
         title: data.title,
         date: data.date,
+        tag: data.tag || [],
         published: data.published !== false, // 기본값: true (없으면 공개)
       };
     })
@@ -112,6 +114,7 @@ export async function getPost(slug: string) {
       content: htmlContent,
       title: data.title,
       date: data.date,
+      tag: data.tag || [],
       published: data.published !== false,
     };
   } catch {

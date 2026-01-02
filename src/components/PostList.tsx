@@ -51,7 +51,7 @@ const PostItem = React.memo(
             </time>
 
             {/* Title and metadata */}
-            <div className='flex-1 min-w-0 flex flex-col gap-2'>
+            <div className='flex-1 min-w-0 flex flex-col gap-3'>
               <div className='w-fit'>
                 <h2
                   className='text-2xl font-bold leading-tight text-[var(--color-text-primary)]
@@ -63,9 +63,30 @@ const PostItem = React.memo(
                 </h2>
               </div>
 
-              <div className='flex items-center gap-2 text-xs text-[var(--color-text-tertiary)] uppercase tracking-[0.1em] font-medium'>
-                <span>Article</span>
-                <span className='opacity-30'>•</span>
+              <div className='flex items-center gap-3 flex-wrap'>
+                {/* Tags */}
+                {post.tag && post.tag.length > 0 && (
+                  <div className='flex items-center gap-2 flex-wrap'>
+                    {post.tag.map((tag, idx) => (
+                      <span
+                        key={idx}
+                        className='px-2.5 py-1 text-xs font-medium rounded-md
+                                 bg-[var(--color-bg-elevated)] text-[var(--color-text-secondary)]
+                                 border border-[var(--color-border)]
+                                 transition-colors duration-200
+                                 hover:border-[var(--color-accent-primary)] hover:text-[var(--color-accent-primary)]'
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                {/* Article label */}
+                <div className='flex items-center gap-2 text-xs text-[var(--color-text-tertiary)] uppercase tracking-[0.1em] font-medium'>
+                  {post.tag && post.tag.length > 0 && <span className='opacity-30'>•</span>}
+                  <span>Article</span>
+                </div>
               </div>
             </div>
           </article>
