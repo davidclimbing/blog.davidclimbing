@@ -81,12 +81,6 @@ const PostItem = React.memo(
                     ))}
                   </div>
                 )}
-
-                {/* Article label */}
-                <div className='flex items-center gap-2 text-xs text-[var(--color-text-tertiary)] uppercase tracking-[0.1em] font-medium'>
-                  {post.tag && post.tag.length > 0 && <span className='opacity-30'>•</span>}
-                  <span>Article</span>
-                </div>
               </div>
             </div>
           </article>
