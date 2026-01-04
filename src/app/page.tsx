@@ -13,12 +13,8 @@ export default function Home() {
   return (
     <ClientPageWrapper>
       <PostsProvider>
-        <main className='w-full flex justify-center px-5 mt-1' itemScope>
-          <div className='w-full max-w-[700px] flex gap-5 flex-col'>
-            {/* TODO: 방문자 통계 컴포넌트 고도화 */}
-            {/* 방문자 통계 컴포넌트 */}
-            {/* <VisitorStats /> */}
-
+        <main className='w-full flex justify-center px-5 mt-8' itemScope>
+          <div className='w-full max-w-[700px] flex gap-6 flex-col'>
             {/* 초기 데이터 로더 */}
             <InitialPostsLoader initialPosts={initialPosts} totalPosts={totalPosts} />
 
