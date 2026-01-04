@@ -1,6 +1,6 @@
 ---
 title: 'ch unit 왜 사용하면 안돼요?'
-date: '2025-03-10'
+date: '2025-03-10T00:00:00+09:00'
 author: 'David Oh'
 tag: ['CSS']
 ---

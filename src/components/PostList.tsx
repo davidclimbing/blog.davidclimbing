@@ -3,27 +3,20 @@
 import Link from 'next/link';
 import React, { useMemo } from 'react';
 import { usePosts, type PostSummary } from '@/contexts/PostsContext';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
 
-// 날짜 포맷터를 컴포넌트 외부에서 한 번만 생성
-const dateFormatter = new Intl.DateTimeFormat('ko-KR', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
+dayjs.locale('ko');
 
 // 메모이제이션된 포스트 아이템 컴포넌트
 const PostItem = React.memo(
   ({ post, index }: { post: PostSummary; index: number }) => {
-    // 날짜 문자열 메모이제이션
     const formattedDate = useMemo(() => {
-      const date = post.date instanceof Date ? post.date : new Date(post.date);
-      return dateFormatter.format(date);
+      return dayjs(post.date).format('YYYY년 M월 D일');
     }, [post.date]);
 
     const isoDateTime = useMemo(() => {
-      return post.date instanceof Date
-        ? post.date.toISOString()
-        : new Date(post.date).toISOString();
+      return post.date;
     }, [post.date]);
 
     return (

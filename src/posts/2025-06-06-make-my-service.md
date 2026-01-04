@@ -1,6 +1,6 @@
 ---
 title: '습작 모음'
-date: '2025-06-06'
+date: '2025-06-06T00:00:00+09:00'
 author: 'David Oh'
 tag: ['Journal']
 ---
