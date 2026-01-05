@@ -11,6 +11,7 @@ import hljs from 'highlight.js';
 import { visit } from 'unist-util-visit';
 import type { Node } from 'unist';
 import { VALIDATION_PATTERNS } from './constants';
+import type { TocItem } from '@/schemas/toc';
 
 // Node types for AST handling
 interface CodeNode extends Node {
@@ -107,15 +108,16 @@ export async function getPost(slug: string) {
       return null;
     }
 
-    const htmlContent = await processMarkdown(content);
+    const { html, toc } = await processMarkdown(content);
 
     return {
       slug,
-      content: htmlContent,
+      content: html,
       title: data.title,
       date: data.date,
       tag: data.tag || [],
       published: data.published !== false,
+      toc,
     };
   } catch {
     return null;
@@ -133,7 +135,7 @@ function getTextContent(node: any): string {
 }
 
 // 헤딩에 ID 속성을 추가하는 커스텀 rehype 플러그인
-function rehypeHeadingIds() {
+function rehypeHeadingIds(toc?: TocItem[]) {
   return (tree: Node) => {
     visit(tree, 'element', (node: any) => {
       if (/^h[1-6]$/.test(node.tagName)) {
@@ -144,6 +146,12 @@ function rehypeHeadingIds() {
         const id = encodeURIComponent(slug);
         node.properties = node.properties || {};
         node.properties.id = id;
+
+        // TOC 데이터 수집 (h2만)
+        if (toc && (node.tagName === 'h2')) {
+          const level = 2;
+          toc.push({ id, text, level });
+        }
       }
     });
   };
@@ -188,13 +196,19 @@ function remarkHighlight() {
   };
 }
 
-async function processMarkdown(markdown: string): Promise<string> {
+interface ProcessedMarkdown {
+  html: string;
+  toc: TocItem[];
+}
+
+async function processMarkdown(markdown: string): Promise<ProcessedMarkdown> {
+  const toc: TocItem[] = [];
   // XSS 방어: remark-rehype와 rehype-sanitize를 사용하여 HTML 정화
   const result = await remark()
     .use(remarkGfm)
     .use(remarkHighlight)
     .use(remarkRehype, { allowDangerousHtml: true })
-    .use(rehypeHeadingIds)
+    .use(() => rehypeHeadingIds(toc))
     .use(rehypeSanitize, {
       // ID 접두어 비활성화 (user-content- 제거)
       clobberPrefix: '',
@@ -229,5 +243,8 @@ async function processMarkdown(markdown: string): Promise<string> {
     .use(rehypeStringify, { allowDangerousHtml: false })
     .process(markdown);
 
-  return result.toString();
+  return {
+    html: result.toString(),
+    toc,
+  };
 }
