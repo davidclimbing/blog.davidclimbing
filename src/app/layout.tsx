@@ -25,15 +25,15 @@ export default function RootLayout({
       <body className='antialiased'>
         <Header />
         {children}
-        <footer className='w-full flex justify-center px-4 py-20 mt-24 border-t border-[var(--color-border)]'>
-          <div className='max-w-[700px] w-full flex flex-col items-center gap-4'>
+        <footer className='w-full flex justify-center px-4 py-10 mt-10'>
+          <div className='max-w-[700px] w-full flex flex-col items-center gap-6'>
             <a
-              className='font-bold text-[var(--color-text-secondary)] hover:text-[var(--color-accent-primary)] transition-colors duration-300 tracking-wide'
+              className='font-medium text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-accent-primary)] transition-colors duration-300 tracking-wide'
               href='https://github.com/davidclimbing'
             >
               ©Davidclimbing
             </a>
-            <p className='text-xs text-[var(--color-text-tertiary)] tracking-wider'>
+            <p className='text-xs text-[var(--color-text-tertiary)] opacity-60 tracking-wider'>
               Crafted with passion for technology
             </p>
           </div>

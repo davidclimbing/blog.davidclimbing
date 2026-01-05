@@ -20,21 +20,24 @@ export const Header = () => {
       className={`
         w-full sticky top-0 left-0 right-0 z-[200] px-5 py-6 flex justify-center
         transition-all duration-500 ease-out
-        ${scrolled
-          ? 'backdrop-blur-xl bg-[rgba(10,10,10,0.85)] shadow-[0_1px_0_rgba(255,107,53,0.1)]'
-          : 'backdrop-blur-sm bg-transparent'
-        }
+        ${scrolled ? 'backdrop-blur-xl' : 'backdrop-blur-none'}
       `}
     >
-      <div className='max-w-[700px] w-full flex items-center'>
+      <div className='max-w-[700px] w-full flex items-center relative'>
+        <div
+          className={`
+            absolute -bottom-6 left-0 right-0 h-px
+            bg-gradient-to-r from-transparent via-[var(--color-border)] to-transparent
+            transition-opacity duration-500
+            ${scrolled ? 'opacity-100' : 'opacity-0'}
+          `}
+        />
         <Link
           className='mr-auto group'
           href='/'
         >
-          <h1 className='text-2xl font-black tracking-tight'>
-            <span className='inline-block transition-all duration-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#ff6b35] group-hover:to-[#f7931e]'>
-              DavidClimbing
-            </span>
+          <h1 className='text-2xl font-black tracking-tight text-[var(--color-text-primary)] group-hover:text-[var(--color-accent-primary)] transition-colors duration-300'>
+            DavidClimbing
           </h1>
         </Link>
         <nav className='flex flex-row items-center gap-6'>
