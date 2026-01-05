@@ -1,6 +1,6 @@
 ---
 title: 'Mutable Vs Immutable'
-date: '2025-04-03T00:00:00+09:00'
+date: '2025-04-03'
 author: 'David Oh'
 tag: ['JavaScript', 'React', 'Programming']
 ---

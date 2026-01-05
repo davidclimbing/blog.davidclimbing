@@ -1,6 +1,6 @@
 ---
 title: '[TIL] 자바스크립트는 왜 메모리 제어를 허용하지 않나요?'
-date: '2025-07-06T00:00:00+09:00'
+date: '2025-07-06'
 author: 'David Oh'
 tag: ['TIL', 'JavaScript', 'Memory']
 ---

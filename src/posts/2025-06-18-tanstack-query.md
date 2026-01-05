@@ -1,6 +1,6 @@
 ---
 title: '[TIL] Tanstack query'
-date: '2025-06-18T00:00:00+09:00'
+date: '2025-06-18'
 author: 'David Oh'
 tag: ['TIL', 'React', 'Tanstack Query']
 ---

@@ -4,10 +4,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Commands
 
-- **Development server**: `npm run dev` or `yarn dev` (uses Turbopack for faster builds)
-- **Build**: `npm run build` or `yarn build` 
-- **Production server**: `npm run start` or `yarn start`
-- **Lint**: `npm run lint` or `yarn lint`
+- **Development server**: `yarn dev` (uses Turbopack for faster builds)
+- **Build**: `yarn build` 
+- **Production server**: `yarn start`
+- **Lint**: `yarn lint`
 
 ## Architecture Overview
 

@@ -1,6 +1,6 @@
 ---
 title: '테스트 방법론'
-date: '2023-06-23T00:00:00+09:00'
+date: '2023-06-23'
 author: 'David Oh'
 tag: ['Testing', 'QA', 'Methodology']
 ---

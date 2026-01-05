@@ -1,6 +1,6 @@
 ---
 title: 'Serialize Vs Deserialize'
-date: '2025-04-11T00:00:00+09:00'
+date: '2025-04-11'
 author: 'David Oh'
 published: false
 ---

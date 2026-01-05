@@ -125,6 +125,30 @@ export async function getPost(slug: string) {
 // Cache for syntax highlighting to avoid repeated processing
 const highlightCache = new Map<string, string>();
 
+// 헤딩 텍스트 추출 헬퍼 함수
+function getTextContent(node: any): string {
+  if (node.type === 'text') return node.value;
+  if (node.children) return node.children.map(getTextContent).join('');
+  return '';
+}
+
+// 헤딩에 ID 속성을 추가하는 커스텀 rehype 플러그인
+function rehypeHeadingIds() {
+  return (tree: Node) => {
+    visit(tree, 'element', (node: any) => {
+      if (/^h[1-6]$/.test(node.tagName)) {
+        const text = getTextContent(node);
+        // slug 생성: 소문자 + 공백을 하이픈으로 + 허용 문자만 유지 + URL 인코딩
+        const slug = text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w가-힣-]/g, '');
+        // 한글을 URL 인코딩하여 href와 일치시킴
+        const id = encodeURIComponent(slug);
+        node.properties = node.properties || {};
+        node.properties.id = id;
+      }
+    });
+  };
+}
+
 function remarkHighlight() {
   return (tree: Node) => {
     visit(tree, 'code', (node: CodeNode) => {
@@ -170,7 +194,10 @@ async function processMarkdown(markdown: string): Promise<string> {
     .use(remarkGfm)
     .use(remarkHighlight)
     .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeHeadingIds)
     .use(rehypeSanitize, {
+      // ID 접두어 비활성화 (user-content- 제거)
+      clobberPrefix: '',
       // 허용할 태그와 속성 설정
       tagNames: [
         'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
@@ -186,6 +213,12 @@ async function processMarkdown(markdown: string): Promise<string> {
         img: ['src', 'alt', 'title'],
         code: ['class'],
         pre: ['class'],
+        h1: ['id'],
+        h2: ['id'],
+        h3: ['id'],
+        h4: ['id'],
+        h5: ['id'],
+        h6: ['id'],
         '*': ['class'], // highlight.js 클래스 허용
       },
       protocols: {

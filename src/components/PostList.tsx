@@ -69,7 +69,7 @@ const PostItem = React.memo(
                                  transition-colors duration-200
                                  hover:border-[var(--color-accent-primary)] hover:text-[var(--color-accent-primary)]'
                       >
-                        #{tag}
+                        {tag}
                       </span>
                     ))}
                   </div>
