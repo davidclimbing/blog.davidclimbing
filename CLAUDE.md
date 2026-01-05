@@ -51,3 +51,12 @@ This is a Next.js 15 blog application with the following key architectural patte
 - Supports syntax highlighting for multiple languages using highlight.js with GitHub dark theme
 - Post frontmatter format: `title`, `date`, `author` fields required
 - Dark theme design with Korean language support
+
+## Git Workflow
+
+작업 완료 후 커밋 시 다음 절차를 따른다:
+
+1. 변경된 파일과 내용을 분석하여 커밋 메시지 초안 작성
+2. 사용자에게 커밋 메시지를 보여주고 승인 요청
+3. 사용자 승인 후에만 커밋 실행
+4. 푸시는 사용자가 명시적으로 요청한 경우에만 실행
