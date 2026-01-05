@@ -5,11 +5,6 @@ author: 'David Oh'
 tag: ['Angular', 'Frontend', 'Signal']
 ---
 
-## 목차
-
-- [Angular 에서 Signals는 무엇인가?](#angular-에서-signals는-무엇인가)
-- [Signals 왜 좋은가?](#signals-왜-좋은가)
-
 ## 개요
 
 - Angular 17에서 Signals 라는 시스템을 새롭게 도입
