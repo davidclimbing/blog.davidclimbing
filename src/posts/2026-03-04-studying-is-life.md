@@ -1,6 +1,6 @@
 ---
-title: '09/07'
-date: '2025-09-07'
+title: '첨부터 다시..'
+date: '2026-03-04'
 author: 'David Oh'
 ---
 
