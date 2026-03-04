@@ -8,15 +8,17 @@ author: 'David Oh'
 
 1. 브라우저 주소창에 URL 을 입력해서 IP 주소를 받는 일련의 과정?
 
-입력된 URL 을 브라우저가 파싱을 하고, 파싱한 URL 의 도메인을 추출하여 IP 주소를 얻기 위해 여러 단계를 거쳐서 IP 주소를 얻습니다.
+> 입력된 URL 을 브라우저가 파싱을 하고, 파싱한 URL 의 도메인을 추출하여 IP 주소를 얻기 위해 여러 단계를 거쳐서 IP 주소를 얻습니다.
 
-    1. 브라우저 캐시를 확인하여 도메인의 IP 존재 유무를 확인
-    2. OS 의 hosts 파일을 확인하여 IP 존재 유무를 확인
-    3. ISP 의 DNS resolver 를 통해 Root name server 에 도메인의 IP 주소를 요청
-    4. TLD (Top Level Domain) - .com, .io 와 같은 널리 쓰이는 도메인 서버에 IP 주소를 요청
-    5. Auth(뭐시기 있는데?) 도메인 서버에 IP 를 요청하여 최종적으로 IP 주소를 받음
+1. 브라우저 캐시를 확인하여 도메인의 IP 존재 유무를 확인
+2. OS 의 hosts 파일을 확인하여 IP 존재 유무를 확인
+3. ISP 의 DNS resolver 를 통해 Root name server 에 도메인의 IP 주소를 요청
+4. TLD (Top Level Domain) - .com, .io 와 같은 널리 쓰이는 도메인 서버에 IP 주소를 요청
+5. Auth(뭐시기 있는데?) 도메인 서버에 IP 를 요청하여 최종적으로 IP 주소를 받음
 
-2. https://www.naver.com 의 IP 주소를 받고 나서 브라우저에 화면이 보이기까지 일어나는 이벤트들은?
+---
+
+1. https://www.naver.com 의 IP 주소를 받고 나서 브라우저에 화면이 보이기까지 일어나는 이벤트들은?
 
 https 요청을 하기 위해서 우선, TCP 연결을 합니다.
 
