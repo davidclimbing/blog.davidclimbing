@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import React, { useMemo } from 'react';
 import { usePosts, type PostSummary } from '@/contexts/PostsContext';
 import dayjs from 'dayjs';
@@ -16,7 +16,8 @@ const PostItem = React.memo(
     }, [post.date]);
 
     const isoDateTime = useMemo(() => {
-      return post.date;
+      // Ensure date is string for dateTime attribute
+      return typeof post.date === 'string' ? post.date : post.date.toISOString();
     }, [post.date]);
 
     return (
@@ -51,7 +52,12 @@ const PostItem = React.memo(
                            transition-all duration-300 relative
                            group-hover:text-[var(--color-accent-primary)]'
                 >
-                  {post.title}
+                  <span 
+                    className="inline-block" 
+                    style={{ viewTransitionName: `title-${post.slug}` }}
+                  >
+                    {post.title}
+                  </span>
                   <span className='absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[var(--color-accent-primary)] to-[var(--color-accent-secondary)] transition-all duration-300 group-hover:w-full'></span>
                 </h2>
               </div>

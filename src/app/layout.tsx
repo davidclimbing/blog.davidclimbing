@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Header } from '@/components/shared/Header';
 import { Footer } from '@/components/shared/Footer';
+import { ViewTransitions } from 'next-view-transitions';
 
 export const metadata: Metadata = {
   title: 'Davidclimbing Blog',
@@ -23,16 +24,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='ko'>
-      <body className='antialiased'>
-        <Header />
-        {children}
-        <Footer />
-        <Analytics />
-        {process.env.NEXT_PUBLIC_GA_ID && (
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-        )}
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang='ko'>
+        <body className='antialiased'>
+          <Header />
+            {children}
+          <Footer />
+          <Analytics />
+          {process.env.NEXT_PUBLIC_GA_ID && (
+            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+          )}
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }
