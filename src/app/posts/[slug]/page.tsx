@@ -2,6 +2,7 @@ import "./style.scss";
 
 import { getAllPostsMetadata, getPost } from "@/lib/posts";
 import { notFound } from "next/navigation";
+import { Link } from "next-view-transitions";
 import { Giscus } from "@/components/Giscus";
 import { TableOfContents } from "@/components/TableOfContents";
 import dayjs from "dayjs";
@@ -32,14 +33,24 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
 
       <article className="w-full flex justify-center px-5 mt-1">
         <main className="max-w-[700px] w-full flex-col justify-center">
-          <h1 className="text-3xl font-bold mb-1">
-            <span 
-              className="inline-block" 
-              style={{ viewTransitionName: `title-${post.slug}` }}
+          <div className="flex items-start justify-between gap-4 mb-1">
+            <h1 className="text-3xl font-bold">
+              <span
+                className="inline-block"
+                style={{ viewTransitionName: `title-${post.slug}` }}
+              >
+                {post.title}
+              </span>
+            </h1>
+            <Link
+              href="/"
+              aria-label="포스트 목록으로 이동"
+              className="shrink-0 mt-2 inline-flex items-center gap-1 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent-primary)] transition-colors duration-300"
             >
-              {post.title}
-            </span>
-          </h1>
+              <span aria-hidden="true">←</span>
+              <span>목록</span>
+            </Link>
+          </div>
           <time dateTime={post.date} className="text-gray-500">
             {formattedDate}
           </time>
